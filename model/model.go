@@ -25,7 +25,8 @@ func EstablishConecction() (*gorm.DB, error) {
 }
 
 func StoreForSession() (*pgstore.PGStore, error) {
-	store, err := pgstore.NewPGStore(databaseURL)
+	// ここの情報が足りないのでは？
+	store, err := pgstore.NewPGStore(databaseURL, []byte("serect-key"))
 
 	return store, err
 }

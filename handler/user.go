@@ -4,10 +4,16 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/antonlindstrom/pgstore"
+
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
 
 	"github.com/oribe1115/phan-sns-server/model"
+)
+
+var (
+	store *pgstore.PGStore
 )
 
 func CreateUserStatusHandler(c echo.Context) error {
@@ -39,7 +45,8 @@ func LoginHandler(c echo.Context) error {
 		}
 	}
 
-	sess, err := session.Get("sessions", c)
+	// ここどうすればいいかわからん
+	sess, err := store.Get()
 	if err != nil {
 		fmt.Println(err)
 		return c.String(http.StatusInternalServerError, "something wrong in getting session")
