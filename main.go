@@ -33,9 +33,11 @@ func main() {
 		return c.String(http.StatusOK, "Hello, World.\n")
 	})
 
-	e.GET("/create/tabele/userstatus", handler.CreateUserStatusHandler)
+	e.GET("/create/table/userstatus", handler.CreateUserStatusHandler)
 	e.POST("/signup", handler.SignUpHandler)
 	e.POST("/login", handler.LoginHandler)
+
+	e.GET("/create/table/post", handler.CreatePostsTableHandler)
 
 	// withLogin := e.Group("")
 	// withLogin.Use(handler.CheckLogin)

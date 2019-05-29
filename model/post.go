@@ -12,3 +12,7 @@ type Post struct {
 	DateInGame
 	CoopStatus
 }
+
+func CreatePostsTable() {
+	db.CreateTable(&Post{})
+}
