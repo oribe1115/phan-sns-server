@@ -39,8 +39,10 @@ func main() {
 
 	e.GET("/create/table/post", handler.CreatePostsTableHandler)
 
-	// withLogin := e.Group("")
-	// withLogin.Use(handler.CheckLogin)
+	withLogin := e.Group("")
+	withLogin.Use(handler.CheckLogin)
+
+	withLogin.POST("/newpost", handler.NewPostHandler)
 
 	port := os.Getenv("PORT")
 	if port == "" {
