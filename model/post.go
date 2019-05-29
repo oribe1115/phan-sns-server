@@ -19,8 +19,6 @@ type Post struct {
 type NewPostData struct {
 	UserID  string `json:"user_name"`
 	Content string `json:"content"`
-	DateInGame
-	CoopStatus
 }
 
 func CreatePostsTable() {
@@ -31,8 +29,14 @@ func NewPost(postedData NewPostData) error {
 	newPost := Post{}
 	newPost.UserID = postedData.UserID
 	newPost.Content = postedData.Content
-	newPost.DateInGame = postedData.DateInGame
-	newPost.CoopStatus = postedData.CoopStatus
+
+	userStatus := UserStatus{}
+	errDb := db.Table("user_status").Select("*").Where("user_id = ?", postedData.UserID).Find(&userStatus)
+	if errDb.Error != nil {
+		return errors.New("faild to serch user_status")
+	}
+	newPost.DateInGame = userStatus.DateInGame
+	newPost.CoopStatus = userStatus.CoopStatus
 
 	u, err := uuid.NewRandom()
 	if err != nil {
