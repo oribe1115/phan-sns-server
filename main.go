@@ -15,7 +15,7 @@ import (
 )
 
 func main() {
-	_, err := model.EstablishConecction()
+	_, err := model.EstablishConnection()
 	if err != nil {
 		log.Fatalf("Cannot Connect to Database: %s", err)
 	}

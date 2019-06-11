@@ -13,7 +13,7 @@ var (
 	databaseURL string
 )
 
-func EstablishConecction() (*gorm.DB, error) {
+func EstablishConnection() (*gorm.DB, error) {
 	databaseURL = os.Getenv("DATABASE_URL")
 	_db, err := gorm.Open("postgres", databaseURL)
 	if err != nil {
